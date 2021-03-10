@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'screens/home_page.dart';
 
-void main() {
-  runApp(MyApp());
+Future main() async {
+  await dotenv.load();
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

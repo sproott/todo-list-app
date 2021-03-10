@@ -1,27 +1,43 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../providers/dio.provider.dart';
+import 'models/user-dto.model.dart';
 import 'models/user.model.dart';
 
 abstract class UserRepository {
-  Future<bool> register({required String username, required String password});
-  Future<bool> login({required String username, required String password});
-  User? getUser();
+  Future<bool> register(UserDto userDto);
+  Future<bool> login(UserDto userDto);
+  Future<User?> getUser();
 }
+
+final String userRoute = '/user';
 
 class UserRepositoryDio implements UserRepository {
+  final Dio _dio;
+
+  const UserRepositoryDio(this._dio);
+
   @override
-  Future<bool> register({required String username, required String password}) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<bool> register(UserDto userDto) async {
+    return jsonDecode(
+        (await _dio.post('$userRoute/register', data: userDto.toJson())).data);
   }
 
   @override
-  Future<bool> login({required String username, required String password}) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<bool> login(UserDto userDto) async {
+    return jsonDecode(
+        (await _dio.post('$userRoute/login', data: userDto.toJson())).data);
   }
 
   @override
-  User? getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<User?> getUser() async {
+    final response = await _dio.get('$userRoute');
+    return response.data != null ? User.fromJson(response.data) : null;
   }
 }
+
+final userRepositoryProvider =
+    Provider<UserRepository>((ref) => UserRepositoryDio(ref.read(dioProvider)));

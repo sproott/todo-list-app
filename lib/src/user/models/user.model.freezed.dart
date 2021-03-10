@@ -20,10 +20,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
 class _$UserTearOff {
   const _$UserTearOff();
 
-  _User call({required String username, required String email}) {
+  _User call({required String username}) {
     return _User(
       username: username,
-      email: email,
     );
   }
 
@@ -38,7 +37,6 @@ const $User = _$UserTearOff();
 /// @nodoc
 mixin _$User {
   String get username => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +47,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({String username, String email});
+  $Res call({String username});
 }
 
 /// @nodoc
@@ -63,16 +61,11 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? username = freezed,
-    Object? email = freezed,
   }) {
     return _then(_value.copyWith(
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -83,7 +76,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({String username, String email});
+  $Res call({String username});
 }
 
 /// @nodoc
@@ -98,16 +91,11 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? username = freezed,
-    Object? email = freezed,
   }) {
     return _then(_User(
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -117,19 +105,17 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_User with DiagnosticableTreeMixin implements _User {
-  const _$_User({required this.username, required this.email});
+  const _$_User({required this.username});
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
 
   @override
   final String username;
-  @override
-  final String email;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(username: $username, email: $email)';
+    return 'User(username: $username)';
   }
 
   @override
@@ -137,8 +123,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('username', username))
-      ..add(DiagnosticsProperty('email', email));
+      ..add(DiagnosticsProperty('username', username));
   }
 
   @override
@@ -147,16 +132,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
         (other is _User &&
             (identical(other.username, username) ||
                 const DeepCollectionEquality()
-                    .equals(other.username, username)) &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)));
+                    .equals(other.username, username)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(username) ^
-      const DeepCollectionEquality().hash(email);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(username);
 
   @JsonKey(ignore: true)
   @override
@@ -170,15 +151,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({required String username, required String email}) =
-      _$_User;
+  const factory _User({required String username}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   String get username => throw _privateConstructorUsedError;
-  @override
-  String get email => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
