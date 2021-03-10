@@ -1,0 +1,12 @@
+include: package:pedantic/analysis_options.yaml
+
+linter:
+  rules:
+    prefer_single_quotes: true
+
+analyzer:
+  errors:
+    sort_pub_dependencies: ignore
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"

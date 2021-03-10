@@ -1,0 +1,62 @@
+{
+  "freezed import": {
+    "scope": "dart",
+    "prefix": "fImport",
+    "body": [
+      "import 'package:freezed_annotation/freezed_annotation.dart';",
+      "import 'package:flutter/foundation.dart';\n\n"
+    ],
+    "description": "Generate imports for Freezed",
+  },
+  "freezed part": {
+    "scope": "dart",
+    "prefix": "fPart",
+    "body": [
+      "part '$TM_FILENAME_BASE.freezed.dart';\n\n",
+    ],
+    "description": "Generate Freezed part line",
+  },
+  "freezed class": {
+    "scope": "dart",
+    "prefix": "fClass",
+    "body": [
+      "@freezed",
+      "abstract class $1 with _$$1 {",
+      "\tconst factory $1({$0}) = _$1;",
+      "}",
+    ],
+    "description": "Generate Freezed class",
+  },
+  "freezed json part": {
+    "scope": "dart",
+    "prefix": "fJsonPart",
+    "body": [
+      "part '$TM_FILENAME_BASE.freezed.dart';",
+      "part '$TM_FILENAME_BASE.g.dart';\n\n",
+    ],
+    "description": "Generate Freezed JSON part lines",
+  },
+  "freezed json class": {
+    "scope": "dart",
+    "prefix": "fJsonClass",
+    "body": [
+      "@freezed",
+      "abstract class $1 with _$$1 {",
+      "\tconst factory $1({$0}) = _$1;",
+      "\tfactory $1.fromJson(Map<String, dynamic> json) => _$$1FromJson(json);",
+      "}",
+    ],
+    "description": "Generate Freezed class with JSON support",
+  },
+  "freezed union class": {
+    "scope": "dart",
+    "prefix": "fUnionClass",
+    "body": [
+      "@freezed",
+      "abstract class $1 with _$$1 {",
+      "\tconst factory $1.${2/(.)/${1:/downcase}/}() = _$2;",
+      "}",
+    ],
+    "description": "Generate Freezed union class",
+  },
+}
