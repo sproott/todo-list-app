@@ -4,12 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../providers/dio.provider.dart';
-import 'models/user-dto.model.dart';
 import 'models/user.model.dart';
 
 abstract class UserRepository {
   Future<bool> register(UserDto userDto);
   Future<bool> login(UserDto userDto);
+  Future<bool> logout();
   Future<User?> getUser();
 }
 
@@ -33,9 +33,14 @@ class UserRepositoryDio implements UserRepository {
   }
 
   @override
+  Future<bool> logout() async {
+    return jsonDecode((await _dio.post('$userRoute/logout')).data);
+  }
+
+  @override
   Future<User?> getUser() async {
     final response = await _dio.get('$userRoute');
-    return response.data != null ? User.fromJson(response.data) : null;
+    return response.data != '' ? User.fromJson(response.data) : null;
   }
 }
 

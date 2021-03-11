@@ -1,39 +1,39 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'models/user-dto.model.dart';
 import 'user.repository.dart';
 
 import 'models/user.model.dart';
 
-class UserService extends StateNotifier {
+class UserService extends StateNotifier<AsyncValue<User?>> {
   final UserRepository _userRepository;
-
-  User? _user;
 
   UserService(
     this._userRepository,
-  ) : super(null);
-
-  Future register(UserDto userDto) async {
-    return _withRefetch(() => _userRepository.register(userDto))();
+  ) : super(AsyncLoading()) {
+    _refetch();
   }
 
-  Future<bool> login(UserDto userDto) async {
-    return _withRefetch(() => _userRepository.login(userDto))();
-  }
+  Future<bool> register(UserDto userDto) =>
+      _withRefetch(() => _userRepository.register(userDto))();
 
-  User? getUser() {
-    return _user;
-  }
+  Future<bool> login(UserDto userDto) =>
+      _withRefetch(() => _userRepository.login(userDto))();
+
+  Future<bool> logout() => _withRefetch(() => _userRepository.logout())();
 
   Future<bool> Function() _withRefetch(Future<bool> Function() callback) {
     return () async {
       if (await callback()) {
-        _user = await _userRepository.getUser();
+        _refetch();
         return true;
       }
       return false;
     };
+  }
+
+  void _refetch() async {
+    state = AsyncLoading();
+    state = AsyncData(await _userRepository.getUser());
   }
 }
 
