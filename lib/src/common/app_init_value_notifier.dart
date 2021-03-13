@@ -16,6 +16,13 @@ import 'not_initialized_error.dart';
 /// final configStringProvider =
 ///     StateNotifierProvider<ConfigStringNotifier>((_) => ConfigStringNotifier());
 /// ```
+///
+/// Value initialization:
+/// ```dart
+/// context
+///     .read(configStringProvider)
+///     .initWith(await getConfigStringFromFile());
+/// ```
 abstract class AppInitValueNotifier<T> extends StateNotifier<T?> {
   AppInitValueNotifier(this._notifierName) : super(null);
 
