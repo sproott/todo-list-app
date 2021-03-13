@@ -13,7 +13,7 @@ final dioProvider = Provider<Dio>((ref) {
   dio.options.baseUrl = ref.read(configProvider).apiPath;
   dio.interceptors.add(InterceptorsWrapper(
     onError: (err) {
-      ref.read(errorProvider).setError(FetchError(err.message));
+      ref.read(errorProvider).setError(FetchError.fromDioError(err));
       print('Dio error: ${err.toString()}');
     },
     onRequest: (req) => print('Dio request: ${req.method} ${req.uri}'),

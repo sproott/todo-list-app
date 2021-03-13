@@ -46,7 +46,7 @@ class UserRepositoryDio implements UserRepository {
         try {
           return await callback();
         } on DioError catch (e) {
-          throw FetchError(e.message);
+          throw FetchError.fromDioError(e);
         }
       };
 }
