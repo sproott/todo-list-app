@@ -65,8 +65,8 @@ void useErrorHandler(BuildContext context) {
 
   if (error != null) {
     print(error.toString());
-    _errorProvider.clearError();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _errorProvider.clearError();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error')),
       );

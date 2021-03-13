@@ -4,8 +4,6 @@ import '../src/common/fetch_error.dart';
 class ErrorNotifier extends StateNotifier<FetchError?> {
   ErrorNotifier() : super(null);
 
-  FetchError? get error => state;
-
   void setError(FetchError error) {
     state = error;
   }

@@ -28,7 +28,7 @@ abstract class AppInitValueNotifier<T> extends StateNotifier<T?> {
   @override
   T get state {
     if (super.state == null) {
-      throw NotInitializedError('Value not initialized.');
+      throw NotInitializedError('AppInitValueNotifier value not initialized.');
     } else {
       return super.state!;
     }
