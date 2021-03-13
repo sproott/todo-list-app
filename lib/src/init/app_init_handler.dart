@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import '../../models/app_init_status.model.dart';
 import '../../providers/cookie_path.provider.dart';
 import '../../screens/error_page.dart';
 import '../../screens/home_page.dart';
 import '../../screens/loading_page.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppInitHandler extends StatelessWidget {
   @override

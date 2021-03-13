@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'src/init/app_init_handler.dart';
 
 Future main() async {
