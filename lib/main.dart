@@ -3,12 +3,20 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:todo_list_app/models/app_init_status.model.dart';
 
+import 'models/app_init_status.model.dart';
 import 'providers/cookie_path.provider.dart';
 import 'screens/error_page.dart';
 import 'screens/home_page.dart';
 import 'screens/loading_page.dart';
+
+Future main() async {
+  await dotenv.load();
+
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
+}
 
 Future<AppInitStatus> _appInit(BuildContext context) async {
   await _initProviders(context);
@@ -20,7 +28,7 @@ Future<AppInitStatus> _appInit(BuildContext context) async {
 Future _initProviders(BuildContext context) async {
   context
       .read(cookiePathProvider)
-      .setCookiePath((await getApplicationDocumentsDirectory()).path);
+      .initWith((await getApplicationDocumentsDirectory()).path);
 }
 
 Future<bool> _requestStoragePermission() async {
@@ -28,14 +36,6 @@ Future<bool> _requestStoragePermission() async {
     Permission.storage,
   ].request();
   return result[Permission.storage]!.isGranted;
-}
-
-Future main() async {
-  await dotenv.load();
-
-  runApp(ProviderScope(
-    child: MyApp(),
-  ));
 }
 
 class MyApp extends StatelessWidget {

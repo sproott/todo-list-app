@@ -1,13 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CookiePathNotifier extends StateNotifier<String?> {
-  CookiePathNotifier() : super(null);
+import '../src/common/app_init_value_notifier.dart';
 
-  void setCookiePath(String cookiePath) {
-    state ??= cookiePath;
-  }
+class CookiePathNotifier extends AppInitValueNotifier<String> {
+  CookiePathNotifier() : super('CookiePathNotifier');
 }
 
-final cookiePathProvider = StateNotifierProvider<CookiePathNotifier>((ref) {
-  return CookiePathNotifier();
-});
+final cookiePathProvider =
+    StateNotifierProvider<CookiePathNotifier>((_) => CookiePathNotifier());

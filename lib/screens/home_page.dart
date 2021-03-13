@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todo_list_app/screens/loading_page.dart';
 
 import '../providers/error.provider.dart';
 import '../src/user/models/user.model.dart';
 import '../src/user/user.service.dart';
 import 'error_page.dart';
+import 'loading_page.dart';
 
 final userProvider = ScopedProvider<User>((ref) => throw UnimplementedError());
 
