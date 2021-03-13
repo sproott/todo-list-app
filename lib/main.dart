@@ -10,6 +10,13 @@ import 'screens/error_page.dart';
 import 'screens/home_page.dart';
 import 'screens/loading_page.dart';
 
+Future<AppInitStatus> _appInit(BuildContext context) async {
+  await _initProviders(context);
+  final success = await _requestStoragePermission();
+  if (!success) return AppInitStatus.storagePermissionDenied();
+  return AppInitStatus.success();
+}
+
 Future _initProviders(BuildContext context) async {
   context
       .read(cookiePathProvider)
@@ -47,22 +54,19 @@ class MyApp extends StatelessWidget {
 class _AppInitHandler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<AppInitStatus>(future: () async {
-      await _initProviders(context);
-      final success = await _requestStoragePermission();
-      if (!success) return AppInitStatus.storagePermissionDenied();
-      return AppInitStatus.success();
-    }(), builder: (context, snapshot) {
-      if (snapshot.data != null) {
-        return snapshot.data!.when(
-          success: () => HomePage(),
-          storagePermissionDenied: () => ErrorPage(
-              message:
-                  'App cannot work without storage permissions. Please go into the settings and enable storage permission. Then restart the app.'),
-        );
-      } else {
-        return LoadingPage();
-      }
-    });
+    return FutureBuilder<AppInitStatus>(
+        future: _appInit(context),
+        builder: (context, snapshot) {
+          if (snapshot.data != null) {
+            return snapshot.data!.when(
+              success: () => HomePage(),
+              storagePermissionDenied: () => ErrorPage(
+                  message:
+                      'App cannot work without storage permissions. Please go into the settings and enable storage permission. Then restart the app.'),
+            );
+          } else {
+            return LoadingPage();
+          }
+        });
   }
 }
