@@ -47,3 +47,6 @@ app.*.map.json
 
 # dotenv
 .env*
+
+# fvm
+/.fvm/flutter_sdk
