@@ -24,7 +24,7 @@ import 'not_initialized_error.dart';
 abstract class AppInitValueNotifier<T> extends StateNotifier<T?> {
   AppInitValueNotifier() : super(null);
 
-  /// Throws [NotInitializedError] when the [state] is accessed before being initialized.
+  /// Throws [NotInitializedError] when [state] is accessed before being initialized.
   @override
   T get state {
     if (super.state == null) {
@@ -34,7 +34,7 @@ abstract class AppInitValueNotifier<T> extends StateNotifier<T?> {
     }
   }
 
-  /// Sets the state to [value] only if it's null
+  /// Sets the state to [value] only if [state] null
   void initWith(T value) {
     super.state ??= value;
   }
