@@ -57,13 +57,17 @@ class _AppInitHandler extends StatelessWidget {
     return FutureBuilder<AppInitStatus>(
         future: _appInit(context),
         builder: (context, snapshot) {
-          if (snapshot.data != null) {
+          if (snapshot.hasData) {
             return snapshot.data!.when(
               success: () => HomePage(),
               storagePermissionDenied: () => ErrorPage(
                   message:
                       'App cannot work without storage permissions. Please go into the settings and enable storage permission. Then restart the app.'),
             );
+          } else if (snapshot.hasError) {
+            return ErrorPage(
+                message:
+                    'An unknown error has occured, please contact the administrator.');
           } else {
             return LoadingPage();
           }
