@@ -3,8 +3,8 @@
     "scope": "dart",
     "prefix": "fImport",
     "body": [
-      "import 'package:freezed_annotation/freezed_annotation.dart';",
-      "import 'package:flutter/foundation.dart';\n\n"
+      "import 'package:flutter/foundation.dart';",
+      "import 'package:freezed_annotation/freezed_annotation.dart';\n\n",
     ],
     "description": "Generate imports for Freezed",
   },
