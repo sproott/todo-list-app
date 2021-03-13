@@ -4,9 +4,7 @@
     "prefix": "appInitValueNotifier",
     "body": [
       "import 'package:hooks_riverpod/hooks_riverpod.dart';\n",
-      "class $1Notifier extends AppInitValueNotifier<$2> {",
-      "\t$1Notifier() : super('$1');",
-      "}\n",
+      "class $1Notifier extends AppInitValueNotifier<$2> {}\n",
       "final ${1/(.)/${1:/downcase}/}Provider = StateNotifierProvider<$1Notifier>((_) => $1Notifier());",
     ],
     "description": "Generate an AppInitValueNotifier class",

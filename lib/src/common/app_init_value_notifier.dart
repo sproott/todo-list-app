@@ -9,9 +9,7 @@ import 'not_initialized_error.dart';
 /// ## Usage example: asynchronously fetched string
 /// Provider for a config string fetched asynchronously from a file:
 /// ```dart
-/// class ConfigStringNotifier extends AppInitValueNotifier<String> {
-///   ConfigStringNotifier() : super('ConfigStringNotifier');
-/// }
+/// class ConfigStringNotifier extends AppInitValueNotifier<String> {}
 ///
 /// final configStringProvider =
 ///     StateNotifierProvider<ConfigStringNotifier>((_) => ConfigStringNotifier());
@@ -24,16 +22,13 @@ import 'not_initialized_error.dart';
 ///     .initWith(await getConfigStringFromFile());
 /// ```
 abstract class AppInitValueNotifier<T> extends StateNotifier<T?> {
-  AppInitValueNotifier(this._notifierName) : super(null);
+  AppInitValueNotifier() : super(null);
 
-  /// The name of this notifier for error messages.
-  final String _notifierName;
-
-  /// Throws [NotInitializedError] when the [state] gets accessed before being initialized.
+  /// Throws [NotInitializedError] when the [state] is accessed before being initialized.
   @override
   T get state {
     if (super.state == null) {
-      throw NotInitializedError('$_notifierName not initialized.');
+      throw NotInitializedError('Value not initialized.');
     } else {
       return super.state!;
     }
