@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'errors/app.error.dart';
+import '../errors/app.error.dart';
 import 'models/app_init_value.union.dart';
 
 class _NotInitializedError extends AppError {
