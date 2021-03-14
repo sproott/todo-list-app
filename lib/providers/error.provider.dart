@@ -1,11 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../src/common/errors/app.error.dart';
 
-import '../src/common/fetch_error.dart';
-
-class ErrorNotifier extends StateNotifier<FetchError?> {
+class ErrorNotifier extends StateNotifier<AppError?> {
   ErrorNotifier() : super(null);
 
-  void setError(FetchError error) {
+  void setError(AppError error) {
     state = error;
   }
 

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../providers/dio.provider.dart';
-import '../common/fetch_error.dart';
+import '../common/errors/fetch.error.dart';
 import 'models/user.model.dart';
 
 abstract class UserRepository {

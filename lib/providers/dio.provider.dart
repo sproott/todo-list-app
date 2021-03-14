@@ -2,7 +2,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../src/common/fetch_error.dart';
+import '../src/common/errors/fetch.error.dart';
 
 import 'config.provider.dart';
 import 'cookie_path.provider.dart';
@@ -20,7 +20,7 @@ final dioProvider = Provider<Dio>((ref) {
     onResponse: (res) => print('Dio response: ${res.data.toString()}'),
   ));
   var cookieJar = PersistCookieJar(
-      storage: FileStorage(ref.read(cookiePathProvider.state)! + '/.cookies/'));
+      storage: FileStorage(ref.read(cookiePathProvider).value + '/.cookies/'));
   dio.interceptors.add(CookieManager(cookieJar));
   return dio;
 });

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'app_init_status.model.freezed.dart';
+part 'app_init_status.union.freezed.dart';
 
 @freezed
 abstract class AppInitStatus with _$AppInitStatus {

@@ -2,7 +2,8 @@ include: package:pedantic/analysis_options.yaml
 
 linter:
   rules:
-    prefer_single_quotes: true
+    prefer_relative_imports: true
+    directives_ordering: true
 
 analyzer:
   errors:

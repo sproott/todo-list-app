@@ -1,5 +1,5 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class Config {
   final String apiPath = env['API_PATH'] ?? '';

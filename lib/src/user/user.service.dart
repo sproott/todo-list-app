@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../common/fetch_error.dart';
+import '../common/errors/fetch.error.dart';
 import 'models/user.model.dart';
 import 'user.repository.dart';
 

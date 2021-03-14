@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'errors/../app.error.dart';
 
-class FetchError implements Exception {
-  FetchError(this.message);
+class FetchError extends AppError {
+  FetchError(String message) : super(message);
 
   FetchError.fromDioError(DioError dioError) {
     switch (dioError.type) {
@@ -29,8 +30,6 @@ class FetchError implements Exception {
     }
   }
 
-  late String message;
-
   String _handleError(int? statusCode) {
     switch (statusCode) {
       case 400:
@@ -43,7 +42,4 @@ class FetchError implements Exception {
         return 'Oops something went wrong';
     }
   }
-
-  @override
-  String toString() => message;
 }

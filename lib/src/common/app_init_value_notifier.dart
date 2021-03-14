@@ -1,6 +1,16 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'not_initialized_error.dart';
+import 'errors/app.error.dart';
+import 'models/app_init_value.union.dart';
+
+class _NotInitializedError extends AppError {
+  _NotInitializedError() : super('AppInitValueNotifier value not initialized');
+}
+
+class _AlreadyInitializedError extends AppError {
+  _AlreadyInitializedError()
+      : super('Cannot overwrite already initialized AppInitValue');
+}
 
 /// Represents a `StateNotifier` which is only set once during app initialization.
 ///
@@ -21,21 +31,21 @@ import 'not_initialized_error.dart';
 ///     .read(configStringProvider)
 ///     .initWith(await getConfigStringFromFile());
 /// ```
-abstract class AppInitValueNotifier<T> extends StateNotifier<T?> {
-  AppInitValueNotifier() : super(null);
+abstract class AppInitValueNotifier<T> extends StateNotifier<AppInitValue<T>> {
+  AppInitValueNotifier() : super(AppInitValue.notInitialized());
 
+  /// Returns the inner value
   /// Throws [NotInitializedError] when [state] is accessed before being initialized.
-  @override
-  T get state {
-    if (super.state == null) {
-      throw NotInitializedError('AppInitValueNotifier value not initialized.');
-    } else {
-      return super.state!;
-    }
+  T get value {
+    return super.state.when(
+        notInitialized: () => throw _NotInitializedError(),
+        initializedWith: (value) => value);
   }
 
-  /// Sets the state to [value] only if [state] null
+  /// Sets the state to [value] only if [state] is null
   void initWith(T value) {
-    super.state ??= value;
+    super.state.when(
+        notInitialized: () => super.state = AppInitValue.initializedWith(value),
+        initializedWith: (_) => throw _AlreadyInitializedError());
   }
 }
