@@ -31,18 +31,28 @@ class _AlreadyInitializedError extends AppError {
 ///     .read(configStringProvider)
 ///     .initWith(await getConfigStringFromFile());
 /// ```
+///
+/// Value read:
+/// ```dart
+/// final value = context
+///     .read(configStringProvider)
+///     .value;
+/// ```
 abstract class AppInitValueNotifier<T> extends StateNotifier<AppInitValue<T>> {
   AppInitValueNotifier() : super(AppInitValue.notInitialized());
 
-  /// Returns the inner value
-  /// Throws [NotInitializedError] when [state] is accessed before being initialized.
+  /// Returns the inner value.
+  ///
+  /// Throws [_NotInitializedError] when [value] is accessed before being initialized.
   T get value {
     return super.state.when(
         notInitialized: () => throw _NotInitializedError(),
         initializedWith: (value) => value);
   }
 
-  /// Sets the state to [value] only if [state] is null
+  /// Sets the state to [value] only if [state] is not initialized.
+  ///
+  /// Throws [_AlreadyInitializedError] when [state] is already initialized.
   void initWith(T value) {
     super.state.when(
         notInitialized: () => super.state = AppInitValue.initializedWith(value),
